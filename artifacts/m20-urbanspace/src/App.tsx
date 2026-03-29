@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { HomePage } from "@/pages/HomePage";
 import { AdminPage } from "@/pages/AdminPage";
 import { SiteSettingsProvider } from "@/context/SiteSettingsContext";
+import { ProjectsProvider } from "@/context/ProjectsContext";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -22,14 +23,16 @@ function Router() {
 function App() {
   return (
     <SiteSettingsProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <Router />
-          </WouterRouter>
-          <Toaster />
-        </TooltipProvider>
-      </QueryClientProvider>
+      <ProjectsProvider>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <Router />
+            </WouterRouter>
+            <Toaster />
+          </TooltipProvider>
+        </QueryClientProvider>
+      </ProjectsProvider>
     </SiteSettingsProvider>
   );
 }
