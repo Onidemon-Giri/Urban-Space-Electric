@@ -1,0 +1,18 @@
+packages:
+  "framer-motion": "For high-quality scroll animations and page reveals"
+  "react-hook-form": "For robust contact form state management"
+  "@hookform/resolvers": "For Zod validation integration with react-hook-form"
+  "clsx": "For conditional class name joining"
+  "tailwind-merge": "For merging Tailwind classes safely"
+
+images:
+  - path: "artifacts/m20-urbanspace/public/images/hero-bg.png"
+    description: "Abstract dark industrial background with subtle glowing electric yellow circuit lines, heavy concrete texture, dramatic moody lighting, professional and powerful aesthetic"
+    aspect_ratio: "16:9"
+  - path: "artifacts/m20-urbanspace/public/images/about-texture.png"
+    description: "Macro shot of a dark matte metallic surface with precise geometric panel lines, subtle electric yellow glowing edge reflections, modern industrial vibe"
+    aspect_ratio: "4:3"
+
+notes:
+  - This is a static frontend-only site, contact form submission is mocked using a timeout and toast notification.
+  - All navigation is handled via anchor links for smooth scrolling to sections on the homepage.

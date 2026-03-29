@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "M20 URBANSPACE ELECTRICALS"
+version = "1.0.0"
+id = "artifacts/m20-urbanspace"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21060
+
+[services.development]
+run = "pnpm --filter @workspace/m20-urbanspace run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/m20-urbanspace", "run", "build" ]
+publicDir = "artifacts/m20-urbanspace/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21060"
+BASE_PATH = "/"
