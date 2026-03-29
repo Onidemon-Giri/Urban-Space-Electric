@@ -1,7 +1,10 @@
-import { Zap, MapPin, Phone, Mail, ArrowRight } from "lucide-react"
+import { Zap, MapPin, Phone, Mail, ArrowRight, Settings } from "lucide-react"
+import { useSiteSettings } from "@/context/SiteSettingsContext"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const { settings } = useSiteSettings()
+  const { contact } = settings
   
   return (
     <footer className="bg-[#050505] border-t border-border pt-20 pb-10">
@@ -60,16 +63,16 @@ export function Footer() {
             <h4 className="font-display text-lg mb-6 text-white border-b border-border pb-2 inline-block">Contact Info</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-muted-foreground text-sm">
-                <MapPin className="w-5 h-5 text-primary shrink-0" />
-                <span>123 Urban Power Ave, Suite 400<br/>Metropolis, NY 10001</span>
+                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <span>{contact.address}</span>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground text-sm">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <span>1-800-M20-ELEC</span>
+                <span>{contact.phone}</span>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground text-sm">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <span>dispatch@m20urbanspace.com</span>
+                <span className="break-all">{contact.email}</span>
               </li>
             </ul>
           </div>
@@ -80,10 +83,20 @@ export function Footer() {
           <p className="text-xs text-muted-foreground font-display tracking-widest uppercase">
             &copy; {currentYear} M20 URBANSPACE ELECTRICALS. All Rights Reserved.
           </p>
-          <div className="flex gap-4">
-            <span className="w-2 h-2 bg-primary animate-pulse"></span>
-            <span className="w-2 h-2 bg-primary/50"></span>
-            <span className="w-2 h-2 bg-primary/20"></span>
+          <div className="flex items-center gap-6">
+            <div className="flex gap-4">
+              <span className="w-2 h-2 bg-primary animate-pulse"></span>
+              <span className="w-2 h-2 bg-primary/50"></span>
+              <span className="w-2 h-2 bg-primary/20"></span>
+            </div>
+            <a
+              href="/admin"
+              className="flex items-center gap-1.5 text-[11px] text-muted-foreground/40 hover:text-muted-foreground transition-colors font-display tracking-widest uppercase"
+              title="Admin Panel"
+            >
+              <Settings className="w-3 h-3" />
+              Admin
+            </a>
           </div>
         </div>
       </div>

@@ -1,8 +1,19 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronDown, Activity } from "lucide-react"
+import { useSiteSettings } from "@/context/SiteSettingsContext"
 
 export function Hero() {
+  const { settings } = useSiteSettings()
+  const { stats } = settings
+
+  const statItems = [
+    { value: stats.yearsExperience, label: "Years Experience" },
+    { value: stats.projectsCompleted, label: "Projects Completed" },
+    { value: stats.safetyRecord, label: "Safety Record" },
+    { value: stats.responseTime, label: "Rapid Response" },
+  ]
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden" id="home">
       {/* Background with Grid Overlay */}
@@ -78,12 +89,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 mt-20 md:mt-32 border-t border-border pt-8"
         >
-          {[
-            { value: "15+", label: "Years Experience" },
-            { value: "2.5k", label: "Projects Completed" },
-            { value: "100%", label: "Safety Record" },
-            { value: "24/7", label: "Rapid Response" }
-          ].map((stat, i) => (
+          {statItems.map((stat, i) => (
             <div key={i} className="flex flex-col gap-2">
               <span className="text-3xl md:text-4xl font-display font-bold text-white">{stat.value}</span>
               <span className="text-xs font-display tracking-widest text-primary uppercase">{stat.label}</span>

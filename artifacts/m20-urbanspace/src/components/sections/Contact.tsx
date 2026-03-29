@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { MapPin, Phone, Mail } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useSiteSettings } from "@/context/SiteSettingsContext"
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -35,6 +36,8 @@ const formSchema = z.object({
 
 export function Contact() {
   const { toast } = useToast()
+  const { settings } = useSiteSettings()
+  const { contact } = settings
   const [isPending, setIsPending] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,9 +51,8 @@ export function Contact() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(_values: z.infer<typeof formSchema>) {
     setIsPending(true)
-    // Simulate network request since there is no backend
     setTimeout(() => {
       setIsPending(false)
       toast({
@@ -93,14 +95,14 @@ export function Contact() {
                 <Phone className="w-8 h-8 text-primary mb-4" />
                 <h4 className="text-white font-display font-bold text-lg mb-2">Direct Line</h4>
                 <p className="text-muted-foreground text-sm mb-1">24/7 Dispatch</p>
-                <p className="text-white font-display tracking-widest">1-800-M20-ELEC</p>
+                <p className="text-white font-display tracking-widest break-all">{contact.phone}</p>
               </div>
               
               <div className="bg-card border border-border p-6 clip-edges">
                 <Mail className="w-8 h-8 text-primary mb-4" />
                 <h4 className="text-white font-display font-bold text-lg mb-2">Email Desk</h4>
                 <p className="text-muted-foreground text-sm mb-1">Quotes & Support</p>
-                <p className="text-white font-display tracking-wide">dispatch@m20urbanspace.com</p>
+                <p className="text-white font-display tracking-wide break-all">{contact.email}</p>
               </div>
               
               <div className="bg-card border border-border p-6 clip-edges sm:col-span-2">
@@ -109,7 +111,7 @@ export function Contact() {
                   <div>
                     <h4 className="text-white font-display font-bold text-lg mb-2">Service Area</h4>
                     <p className="text-muted-foreground text-sm">
-                      Headquartered in New York with full operational capacity across the greater tri-state metropolitan area. Mobilization available for large-scale industrial projects nationally.
+                      {contact.address}
                     </p>
                   </div>
                 </div>

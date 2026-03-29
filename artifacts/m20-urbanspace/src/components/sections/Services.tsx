@@ -9,8 +9,9 @@ import {
   ShieldCheck, 
   Cable 
 } from "lucide-react"
+import { useSiteSettings } from "@/context/SiteSettingsContext"
 
-const servicesData = [
+const allServicesData = [
   {
     icon: Building2,
     title: "Commercial Electrical",
@@ -54,6 +55,9 @@ const servicesData = [
 ]
 
 export function Services() {
+  const { settings } = useSiteSettings()
+  const servicesData = allServicesData.slice(0, settings.servicesCount)
+
   return (
     <section className="py-24 md:py-32 bg-background relative" id="services">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
